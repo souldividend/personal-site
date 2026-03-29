@@ -424,6 +424,14 @@ input:focus, textarea:focus {
   padding: 4px 0;
 }
 
+.form-error {
+  display: none;
+  font-size: 14px;
+  color: #c0392b;
+  font-weight: 400;
+  padding: 4px 0;
+}
+
 /* ─── Footer ────────────────────────────────────────────────────────────────── */
 footer {
   max-width: var(--max-w);

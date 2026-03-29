@@ -129,6 +129,7 @@
             <span class="btn-icon">→</span>
           </button>
           <p class="form-success" id="form-success">Message sent — I'll be in touch soon.</p>
+          <p class="form-error" id="form-error">Something went wrong — please try again or email me directly.</p>
         </form>
       </div>
     </section>
@@ -159,17 +160,36 @@
     });
 
     // ── Contact form ───────────────────────────────────────────────────────────
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.submit-btn');
+      const form    = e.target;
+      const btn     = form.querySelector('.submit-btn');
       const success = document.getElementById('form-success');
+      const error   = document.getElementById('form-error');
+
       btn.disabled = true;
       btn.querySelector('.btn-text').textContent = 'Sending…';
-      setTimeout(() => {
-        btn.style.display = 'none';
-        success.style.display = 'block';
-        e.target.reset();
-      }, 800);
+      error.style.display = 'none';
+
+      try {
+        const res = await fetch('https://formspree.io/f/maqleokd', {
+          method:  'POST',
+          headers: { 'Accept': 'application/json' },
+          body:    new FormData(form),
+        });
+
+        if (res.ok) {
+          btn.style.display = 'none';
+          success.style.display = 'block';
+          form.reset();
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.querySelector('.btn-text').textContent = 'Send message';
+        error.style.display = 'block';
+      }
     }
 
     // Nav border on scroll
