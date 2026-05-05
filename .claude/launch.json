@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Jonathan Morris Site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3000", "--directory", "/Users/jonathanmorris/Claude Code Site"],
+      "port": 3000
+    },
+    {
+      "name": "FutureGage Site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3001", "--directory", "/Users/jonathanmorris/FutureGage"],
+      "port": 3001
+    }
+  ]
+}
